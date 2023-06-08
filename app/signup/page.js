@@ -1,10 +1,47 @@
+import { useSession, signIn } from 'next-auth/react';
 
-export default function SignUp() {
-    return (
-      <main className="flex flex-col items-center justify-between p-24">
-        <h3>Sign Up</h3>
-        
-      </main>
-    )
-  }
-  
+function RegistrationForm() {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+
+    const response = await signIn('credentials', {
+      redirect: false,
+      email,
+      password,
+    });
+
+    if (response.error) {
+      // Handle registration error
+      console.error(response.error);
+    } else {
+      // Registration successful, redirect or perform any additional actions
+      // You can access the session data from response.data
+    }
+  };
+
+  return (
+    <>
+      <h3>Sign up</h3>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Email:
+          <input type="email" name="email" required />
+        </label>
+        <br />
+        <label>
+          Password:
+          <input type="password" name="password" required />
+        </label>
+        <br />
+        <button type="submit">Register</button>
+      </form>
+    </>
+  );
+}
+
+export default function ClientRegistrationForm() {
+  return <RegistrationForm />;
+}

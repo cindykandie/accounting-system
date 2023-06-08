@@ -10,6 +10,9 @@ export default function Home() {
       <Link href='/loginpage'>
         <button>Log In</button>
       </Link>
+      <Link href='/dashboard'>
+        <button>Dashboard</button>
+      </Link>
     </main>
   )
 }
